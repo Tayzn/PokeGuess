@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import { Button } from 'react-bootstrap'
-import './App.css'
+import { Container, Col } from 'react-bootstrap'
+import { Header } from './components/Header'
+import { Home } from './components/Home'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <Button>Test</Button>
-    </>
+    <Container fluid className='m-0 p-0 vh-100'>
+      <Col className='h-100 d-flex flex-column'>
+        <Header />
+        <Home />
+      </Col>
+    </Container>
   )
 }
 
