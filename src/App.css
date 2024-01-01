@@ -1,0 +1,9 @@
+body {
+  font-family: 'Pokemon';
+}
+
+@font-face {
+  font-family: 'Pokemon';
+  src: url('./fonts/PokeFont.ttf')
+}
+
