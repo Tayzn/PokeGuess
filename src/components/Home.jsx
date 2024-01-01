@@ -12,10 +12,14 @@ export const Home = () => {
     <Container
       fluid
       className='h-100'
-      style={{ backgroundColor: '#ebe6e6' }}
+      style={{ backgroundColor: '#ebe6e6', fontFamily: 'Pokemon' }}
     >
       <Row className='h-100'>
-        <Col className='d-flex h-100 align-items-center justify-content-center'>
+        <Col
+          xs={2}
+          className='d-flex h-100 p-0'
+          style={{ backgroundColor: 'white', borderRight: '3px solid gray' }}
+        >
           <History history={gameHistory} />
         </Col>
         <Col className='d-flex h-100 align-items-center justify-content-center'>
@@ -24,9 +28,10 @@ export const Home = () => {
             setHistory={setGameHistory}
           />
         </Col>
+        {/*
         <Col className='d-flex h-100 align-items-center justify-content-center'>
           <Settings />
-        </Col>
+        </Col>*/}
       </Row>
     </Container>
   )

@@ -3,10 +3,17 @@ import { Container, Image, Row, Col } from 'react-bootstrap'
 
 const HistoryCard = ({ pokemon, img, categories, correct, skipped }) => {
   return (
-    <Container style={{ borderLeft: `solid 5px ${correct ? 'green' : 'red'}` }}>
+    <Container
+      style={{
+        borderLeft: `solid 5px ${correct ? 'green' : 'red'}`,
+      }}
+    >
       <Row>
         <Col>
-          <Image src={img} />
+          <Image
+            fluid
+            src={img}
+          />
         </Col>
         <Col>
           <span>{pokemon}</span>

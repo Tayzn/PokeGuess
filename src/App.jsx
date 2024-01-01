@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Container, Col } from 'react-bootstrap'
 import { Header } from './components/Header'
 import { Home } from './components/Home'
