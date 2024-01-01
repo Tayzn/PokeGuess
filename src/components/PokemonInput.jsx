@@ -1,46 +1,73 @@
 import React from 'react'
 import { pokemon } from '../data/pokemon'
 import { useState } from 'react'
-import { Form, FormControl, Button } from 'react-bootstrap'
+import { Form, Container, ListGroup, Image } from 'react-bootstrap'
 import { useCombobox } from 'downshift'
+import { capitalizeFirstLetter, getImage } from '../utility/utility'
 
-const PokemonInput = () => {
+const PokemonInput = ({ inputValue, setInputValue }) => {
   const [items, setItems] = useState(pokemon)
 
-  const { isOpen, getMenuProps, getInputProps, getItemProps } = useCombobox({
+  const {
+    isOpen,
+    getMenuProps,
+    getInputProps,
+    highlightedIndex,
+    getItemProps,
+  } = useCombobox({
     onInputValueChange({ inputValue }) {
-      setItems(
-        pokemon.filter((poke) => poke.includes(inputValue.toUpperCase()))
+      let filtered = pokemon.filter((poke) =>
+        poke.includes(inputValue.toUpperCase())
       )
+      setItems(filtered)
+      setInputValue(inputValue)
     },
     items,
     itemToString(item) {
-      return item ? item.toLowerCase() : ''
+      return capitalizeFirstLetter(item)
     },
   })
 
   return (
-    <div>
-      <div>
-        <div>
-          <input placeholder='Bulbasaur' {...getInputProps()} />
-        </div>
-      </div>
-      <ul {...getMenuProps()}>
+    <Container className='h-100'>
+      <Form.Control
+        type='text'
+        placeholder='Pikachu'
+        {...getInputProps()}
+      />
+      <ListGroup
+        as='ul'
+        className={`position-absolute overflow-scroll ${
+          !(isOpen && items.length && inputValue.length > 0) && 'd-none'
+        }`}
+        style={{ maxHeight: '25%', width: '15%' }}
+        {...getMenuProps()}
+      >
         {isOpen &&
-          items.map((item, index) => {
-            if (index > 10) {
-              return
-            }
-
-            return (
-              <li key={item.id} {...getItemProps({ item, index })}>
-                <span>{item}</span>
-              </li>
-            )
-          })}
-      </ul>
-    </div>
+          inputValue.length > 0 &&
+          items.map((poke, index) => (
+            <ListGroup.Item
+              as='li'
+              key={index}
+              style={{
+                backgroundColor: highlightedIndex === index && 'lightblue',
+              }}
+              {...getItemProps({ poke, index })}
+            >
+              <Image
+                fluid
+                src={getImage(poke)}
+              />
+              <span
+                className='mx-2'
+                style={{ fontWeight: '500' }}
+              >
+                {capitalizeFirstLetter(poke)}
+              </span>
+            </ListGroup.Item>
+          ))}
+      </ListGroup>
+    </Container>
   )
 }
 
