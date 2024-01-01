@@ -6,6 +6,21 @@ function findIntersection(categories) {
   return firstCategory.filter((pokemon) => secondCategory.includes(pokemon))
 }
 
+export function generateCategories() {
+  const categories = []
+  const categoryOptions = Object.keys(gameCategories)
+
+  const randomIndex = Math.floor(Math.random() * categoryOptions.length)
+  categories.push(categoryOptions[randomIndex])
+  categoryOptions.splice(randomIndex, 1)
+
+  categories.push(
+    categoryOptions[Math.floor(Math.random() * categoryOptions.length)]
+  )
+
+  return categories
+}
+
 export function checkAnswer(categories, answer) {
   return findIntersection(categories).includes(answer.toUpperCase())
 }

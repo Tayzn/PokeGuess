@@ -1,13 +1,21 @@
 import React from 'react'
 import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap'
-import { useState } from 'react'
-import { checkAnswer, addToHistory } from '../utility/utility'
+import { useState, useEffect } from 'react'
+import {
+  checkAnswer,
+  addToHistory,
+  generateCategories,
+} from '../utility/utility'
 import PokemonInput from './PokemonInput'
 
 export const GameBox = ({ history, setHistory }) => {
   const [categories, setCategories] = useState(['Fire', 'Monotype'])
   const [answer, setAnswer] = useState('')
   const [streak, setStreak] = useState(0)
+
+  useEffect(() => {
+    setCategories(generateCategories())
+  }, [])
 
   const check = (e) => {
     e.preventDefault()
@@ -17,6 +25,7 @@ export const GameBox = ({ history, setHistory }) => {
       setStreak((previous) => {
         return streak + 1
       })
+      setCategories(generateCategories())
     } else {
       setStreak(0)
     }
@@ -31,10 +40,11 @@ export const GameBox = ({ history, setHistory }) => {
     >
       <Col>
         <Row className='d-flex m-4 align-items-center'>
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <Col
               className='d-flex justify-content-center'
               style={{ border: 'solid 1px' }}
+              key={index}
             >
               <span>{category}</span>
             </Col>
