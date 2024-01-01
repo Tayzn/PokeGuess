@@ -5,7 +5,7 @@ import { Form, Container, ListGroup, Image } from 'react-bootstrap'
 import { useCombobox } from 'downshift'
 import { capitalizeFirstLetter, getImage } from '../utility/utility'
 
-const PokemonInput = ({ inputValue, setInputValue }) => {
+const PokemonInput = ({ inputValue, setInputValue, shake }) => {
   const [items, setItems] = useState(pokemon)
 
   const {
@@ -34,6 +34,7 @@ const PokemonInput = ({ inputValue, setInputValue }) => {
         type='text'
         placeholder='Pikachu'
         {...getInputProps()}
+        className={shake ? 'wrong' : ''}
       />
       <ListGroup
         as='ul'
