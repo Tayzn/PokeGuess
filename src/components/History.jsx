@@ -1,13 +1,31 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, ListGroup } from 'react-bootstrap'
+import HistoryCard from './HistoryCard'
 
-export const History = () => {
+export const History = ({ history }) => {
   return (
     <Container
-      className='d-flex justify-content-center align-items-center h-75'
+      className='d-flex justify-content-center align-items-center h-75 overflow-y-scroll'
       style={{ backgroundColor: 'lightgray' }}
     >
-      <a>History</a>
+      <Container
+        fluid
+        className='my-auto'
+      >
+        <ListGroup>
+          {history.map((item, index) => (
+            <ListGroup.Item key={index}>
+              <HistoryCard
+                img={item.img}
+                pokemon={item.pokemon}
+                categories={item.categories}
+                correct={item.correct}
+                skipped={item.skipped}
+              />
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </Container>
     </Container>
   )
 }

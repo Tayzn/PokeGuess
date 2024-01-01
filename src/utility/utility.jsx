@@ -48,3 +48,22 @@ export function getImage(pokemon) {
   }
   return `https://play.pokemonshowdown.com/sprites/gen5/${formattedName}.png`
 }
+
+export function addToHistory(
+  currentHistory,
+  pokemon,
+  categories,
+  correct,
+  skipped
+) {
+  return [
+    {
+      pokemon: pokemon,
+      categories: categories,
+      img: getImage(pokemon),
+      correct: correct,
+      skipped: skipped,
+    },
+    ...currentHistory,
+  ]
+}

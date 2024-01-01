@@ -1,17 +1,17 @@
 import React from 'react'
 import { Container, Col, Form, Button } from 'react-bootstrap'
 import { useState } from 'react'
-import { checkAnswer } from '../utility/utility'
+import { checkAnswer, addToHistory } from '../utility/utility'
 import PokemonInput from './PokemonInput'
 
-export const GameBox = () => {
+export const GameBox = ({ history, setHistory }) => {
   const [categories, setCategories] = useState(['Fire', 'Monotype'])
   const [answer, setAnswer] = useState('')
 
   const check = (e) => {
     e.preventDefault()
     const result = checkAnswer(categories, answer)
-    console.log(result)
+    setHistory(addToHistory(history, answer, categories, result, false))
   }
 
   return (
