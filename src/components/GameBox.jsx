@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap'
 import { useState } from 'react'
 import { checkAnswer, addToHistory } from '../utility/utility'
 import PokemonInput from './PokemonInput'
@@ -7,10 +7,20 @@ import PokemonInput from './PokemonInput'
 export const GameBox = ({ history, setHistory }) => {
   const [categories, setCategories] = useState(['Fire', 'Monotype'])
   const [answer, setAnswer] = useState('')
+  const [streak, setStreak] = useState(0)
 
   const check = (e) => {
     e.preventDefault()
     const result = checkAnswer(categories, answer)
+
+    if (result) {
+      setStreak((previous) => {
+        return streak + 1
+      })
+    } else {
+      setStreak(0)
+    }
+
     setHistory(addToHistory(history, answer, categories, result, false))
   }
 
@@ -19,22 +29,34 @@ export const GameBox = ({ history, setHistory }) => {
       className='d-flex justify-content-center align-items-center h-25'
       style={{ backgroundColor: 'white' }}
     >
-      <Col className='d-flex flex-column m-4 align-items-center h-100'>
-        <a>
-          {categories[0]} and {categories[1]}
-        </a>
-        <Form
-          className='d-flex'
-          onSubmit={(e) => check(e)}
-        >
-          <PokemonInput
-            inputValue={answer}
-            setInputValue={setAnswer}
-          />
-          <Button type='submit'>Submit</Button>
-        </Form>
-
-        <a>Streak: 5</a>
+      <Col>
+        <Row className='d-flex m-4 align-items-center'>
+          {categories.map((category) => (
+            <Col
+              className='d-flex justify-content-center'
+              style={{ border: 'solid 1px' }}
+            >
+              <span>{category}</span>
+            </Col>
+          ))}
+        </Row>
+        <Row className='d-flex m-4 align-items-center'>
+          <Form
+            className='d-flex'
+            onSubmit={(e) => check(e)}
+          >
+            <PokemonInput
+              inputValue={answer}
+              setInputValue={setAnswer}
+            />
+            <Button type='submit'>Submit</Button>
+          </Form>
+        </Row>
+        <Row>
+          <span className='d-flex justify-content-center'>
+            Streak: {streak}
+          </span>
+        </Row>
       </Col>
     </Container>
   )

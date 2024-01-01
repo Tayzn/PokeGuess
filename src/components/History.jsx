@@ -4,10 +4,7 @@ import HistoryCard from './HistoryCard'
 
 export const History = ({ history }) => {
   return (
-    <Container
-      className='d-flex justify-content-center align-items-center h-75 overflow-y-scroll'
-      style={{ backgroundColor: 'lightgray' }}
-    >
+    <Container className='d-flex justify-content-center align-items-center h-75 overflow-y-scroll'>
       <Container
         fluid
         className='my-auto'

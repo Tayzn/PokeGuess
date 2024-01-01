@@ -12,7 +12,7 @@ export const Home = () => {
     <Container
       fluid
       className='h-100'
-      style={{ backgroundColor: 'lightblue' }}
+      style={{ backgroundColor: '#ebe6e6' }}
     >
       <Row className='h-100'>
         <Col className='d-flex h-100 align-items-center justify-content-center'>

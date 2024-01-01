@@ -37,10 +37,10 @@ const PokemonInput = ({ inputValue, setInputValue }) => {
       />
       <ListGroup
         as='ul'
-        className={`position-absolute overflow-scroll ${
+        className={`position-absolute overflow-y-scroll ${
           !(isOpen && items.length && inputValue.length > 0) && 'd-none'
         }`}
-        style={{ maxHeight: '25%', width: '15%' }}
+        style={{ maxHeight: '25%', width: '20%' }}
         {...getMenuProps()}
       >
         {isOpen &&
