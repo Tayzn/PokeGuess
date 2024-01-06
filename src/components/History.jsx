@@ -4,24 +4,15 @@ import HistoryCard from './HistoryCard'
 
 export const History = ({ history }) => {
   return (
-    <Container
-      fluid
-      className='d-flex h-100 p-0 m-0'
-    >
-      <Stack
-        gap={3}
-        className='d-flex h-100 p-0 m-0'
-      >
+    <Container fluid className='d-flex h-100 p-0 m-0'>
+      <Stack gap={3} className='d-flex h-100 p-0 m-0'>
         <span
           className='d-flex justify-content-center'
           style={{ backgroundColor: 'gray' }}
         >
           Your Guesses
         </span>
-        <Container
-          fluid
-          className='h-100 overflow-y-scroll'
-        >
+        <Container fluid className='h-100 overflow-y-scroll'>
           <ListGroup>
             {history.map((item, index) => (
               <ListGroup.Item

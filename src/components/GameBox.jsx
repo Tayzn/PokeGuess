@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import {
   checkAnswer,
   addToHistory,
-  generateCategories,
+  smartGenerateCategories,
 } from '../utility/utility'
 import PokemonInput from './PokemonInput'
 import pokeball from '../assets/images/pokeball.png'
@@ -17,7 +17,7 @@ export const GameBox = ({ history, setHistory }) => {
   const [shake, setShake] = useState(false)
 
   useEffect(() => {
-    setCategories(generateCategories())
+    setCategories(smartGenerateCategories([]))
   }, [])
 
   const check = (e) => {
@@ -28,7 +28,7 @@ export const GameBox = ({ history, setHistory }) => {
       setStreak((previous) => {
         return streak + 1
       })
-      setCategories(generateCategories())
+      setCategories(smartGenerateCategories([]))
     } else {
       setStreak(0)
       setShake(true)
@@ -40,7 +40,7 @@ export const GameBox = ({ history, setHistory }) => {
 
   const skip = (e) => {
     e.preventDefault()
-    setCategories(generateCategories())
+    setCategories(smartGenerateCategories([]))
     setStreak(0)
     setShake(true)
     setTimeout(() => setShake(false), 500)
@@ -64,10 +64,7 @@ export const GameBox = ({ history, setHistory }) => {
           ))}
         </Row>
         <Row className='d-flex m-4 align-items-center'>
-          <Form
-            className='d-flex'
-            onSubmit={(e) => check(e)}
-          >
+          <Form className='d-flex' onSubmit={(e) => check(e)}>
             <PokemonInput
               inputValue={answer}
               setInputValue={setAnswer}
@@ -78,20 +75,14 @@ export const GameBox = ({ history, setHistory }) => {
               variant='success'
               className='d-flex align-items-center p-2 me-1'
             >
-              <Image
-                fluid
-                src={pokeball}
-              />
+              <Image fluid src={pokeball} />
             </Button>
             <Button
               variant='warning'
               className='d-flex align-items-center p-2'
               onClick={skip}
             >
-              <Image
-                fluid
-                src={run}
-              />
+              <Image fluid src={run} />
             </Button>
           </Form>
         </Row>

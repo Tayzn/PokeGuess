@@ -6,6 +6,39 @@ function findIntersection(categories) {
   return firstCategory.filter((pokemon) => secondCategory.includes(pokemon))
 }
 
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length)
+}
+
+export function smartGenerateCategories(disabledCategories) {
+  let validCategories = Object.keys(gameCategories)
+  validCategories = validCategories.filter(
+    (item) => !disabledCategories.includes(item)
+  )
+
+  while (validCategories.length > 0) {
+    const randomPrimaryIndex = getRandomIndex(validCategories)
+    const firstCategory = validCategories[randomPrimaryIndex]
+
+    validCategories.splice(randomPrimaryIndex, 1)
+    let validSecondaries = [...validCategories]
+
+    while (validSecondaries.length > 0) {
+      const randomSecondaryIndex = getRandomIndex(validSecondaries)
+      const secondCategory = validSecondaries[randomSecondaryIndex]
+
+      const candidateCategories = [firstCategory, secondCategory]
+      if (findIntersection(candidateCategories).length >= 1) {
+        return candidateCategories
+      }
+
+      validSecondaries.splice(randomSecondaryIndex, 1)
+    }
+  }
+
+  return []
+}
+
 export function generateCategories() {
   const categories = []
   const categoryOptions = Object.keys(gameCategories)
