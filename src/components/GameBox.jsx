@@ -10,14 +10,14 @@ import PokemonInput from './PokemonInput'
 import pokeball from '../assets/images/pokeball.png'
 import run from '../assets/images/run.png'
 
-export const GameBox = ({ history, setHistory }) => {
+export const GameBox = ({ history, setHistory, disabledCategories }) => {
   const [categories, setCategories] = useState(['Fire', 'Monotype'])
   const [answer, setAnswer] = useState('')
   const [streak, setStreak] = useState(0)
   const [shake, setShake] = useState(false)
 
   useEffect(() => {
-    setCategories(smartGenerateCategories([]))
+    setCategories(smartGenerateCategories(disabledCategories))
   }, [])
 
   const check = (e) => {
@@ -28,7 +28,7 @@ export const GameBox = ({ history, setHistory }) => {
       setStreak((previous) => {
         return streak + 1
       })
-      setCategories(smartGenerateCategories([]))
+      setCategories(smartGenerateCategories(disabledCategories))
     } else {
       setStreak(0)
       setShake(true)
@@ -40,7 +40,7 @@ export const GameBox = ({ history, setHistory }) => {
 
   const skip = (e) => {
     e.preventDefault()
-    setCategories(smartGenerateCategories([]))
+    setCategories(smartGenerateCategories(disabledCategories))
     setStreak(0)
     setShake(true)
     setTimeout(() => setShake(false), 500)

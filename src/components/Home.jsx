@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 export const Home = () => {
   const [gameHistory, setGameHistory] = useState([])
+  const [disabledCategories, setDisabledCategories] = useState([])
 
   return (
     <Container
@@ -26,11 +27,18 @@ export const Home = () => {
           xs={6}
           className='d-flex h-100 align-items-center justify-content-center'
         >
-          <GameBox history={gameHistory} setHistory={setGameHistory} />
+          <GameBox
+            history={gameHistory}
+            setHistory={setGameHistory}
+            disabledCategories={disabledCategories}
+          />
         </Col>
 
         <Col className='d-flex h-100 align-items-center justify-content-center'>
-          <Settings />
+          <Settings
+            disabledCategories={disabledCategories}
+            setDisabledCategories={setDisabledCategories}
+          />
         </Col>
       </Row>
     </Container>
