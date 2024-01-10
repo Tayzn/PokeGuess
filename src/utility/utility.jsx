@@ -1,16 +1,29 @@
 import { gameCategories, animatedImages } from '../data/pokemon'
 
-function findIntersection(categories) {
-  const firstCategory = gameCategories[categories[0]]
-  const secondCategory = gameCategories[categories[1]]
-  return firstCategory.filter((pokemon) => secondCategory.includes(pokemon))
-}
-
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
 }
 
-export function smartGenerateCategories(disabledCategories) {
+function findIntersection(categories) {
+  const pokemon = categories.map((category) => gameCategories[category])
+  return pokemon.reduce((a, b) => a.filter((c) => b.includes(c)))
+}
+
+function getSolutionSet(categories, disabledRegions) {
+  const naiveSolution = findIntersection(categories)
+  const disabledPokemon = disabledRegions
+    .map((region) => gameCategories[region])
+    .flat()
+  return naiveSolution.filter((pokemon) => !disabledPokemon.includes(pokemon))
+}
+
+export function checkAnswer(categories, answer, disabledRegions) {
+  return getSolutionSet(categories, disabledRegions).includes(
+    answer.toUpperCase()
+  )
+}
+
+export function smartGenerateCategories(disabledCategories, disabledRegions) {
   let validCategories = Object.keys(gameCategories)
   validCategories = validCategories.filter(
     (item) => !disabledCategories.includes(item)
@@ -28,7 +41,7 @@ export function smartGenerateCategories(disabledCategories) {
       const secondCategory = validSecondaries[randomSecondaryIndex]
 
       const candidateCategories = [firstCategory, secondCategory]
-      if (findIntersection(candidateCategories).length >= 1) {
+      if (getSolutionSet(candidateCategories, disabledRegions).length > 0) {
         return candidateCategories
       }
 
@@ -37,25 +50,6 @@ export function smartGenerateCategories(disabledCategories) {
   }
 
   return []
-}
-
-export function generateCategories() {
-  const categories = []
-  const categoryOptions = Object.keys(gameCategories)
-
-  const randomIndex = Math.floor(Math.random() * categoryOptions.length)
-  categories.push(categoryOptions[randomIndex])
-  categoryOptions.splice(randomIndex, 1)
-
-  categories.push(
-    categoryOptions[Math.floor(Math.random() * categoryOptions.length)]
-  )
-
-  return categories
-}
-
-export function checkAnswer(categories, answer) {
-  return findIntersection(categories).includes(answer.toUpperCase())
 }
 
 export function capitalizeFirstLetter(word) {

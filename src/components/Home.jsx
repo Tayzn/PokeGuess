@@ -8,6 +8,7 @@ import { useState } from 'react'
 export const Home = () => {
   const [gameHistory, setGameHistory] = useState([])
   const [disabledCategories, setDisabledCategories] = useState([])
+  const [disabledRegions, setDisabledRegions] = useState([])
 
   return (
     <Container
@@ -31,6 +32,7 @@ export const Home = () => {
             history={gameHistory}
             setHistory={setGameHistory}
             disabledCategories={disabledCategories}
+            disabledRegions={disabledRegions}
           />
         </Col>
 
@@ -38,6 +40,8 @@ export const Home = () => {
           <Settings
             disabledCategories={disabledCategories}
             setDisabledCategories={setDisabledCategories}
+            disabledRegions={disabledRegions}
+            setDisabledRegions={setDisabledRegions}
           />
         </Col>
       </Row>

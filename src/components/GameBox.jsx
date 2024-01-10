@@ -10,25 +10,32 @@ import PokemonInput from './PokemonInput'
 import pokeball from '../assets/images/pokeball.png'
 import run from '../assets/images/run.png'
 
-export const GameBox = ({ history, setHistory, disabledCategories }) => {
+export const GameBox = ({
+  history,
+  setHistory,
+  disabledCategories,
+  disabledRegions,
+}) => {
   const [categories, setCategories] = useState(['Fire', 'Monotype'])
   const [answer, setAnswer] = useState('')
   const [streak, setStreak] = useState(0)
   const [shake, setShake] = useState(false)
 
   useEffect(() => {
-    setCategories(smartGenerateCategories(disabledCategories))
-  }, [])
+    setCategories(smartGenerateCategories(disabledCategories, disabledRegions))
+  }, [disabledCategories, disabledRegions])
 
   const check = (e) => {
     e.preventDefault()
-    const result = checkAnswer(categories, answer)
+    const result = checkAnswer(categories, answer, disabledRegions)
 
     if (result) {
       setStreak((previous) => {
         return streak + 1
       })
-      setCategories(smartGenerateCategories(disabledCategories))
+      setCategories(
+        smartGenerateCategories(disabledCategories, disabledRegions)
+      )
     } else {
       setStreak(0)
       setShake(true)
@@ -40,7 +47,7 @@ export const GameBox = ({ history, setHistory, disabledCategories }) => {
 
   const skip = (e) => {
     e.preventDefault()
-    setCategories(smartGenerateCategories(disabledCategories))
+    setCategories(smartGenerateCategories(disabledCategories, disabledRegions))
     setStreak(0)
     setShake(true)
     setTimeout(() => setShake(false), 500)
@@ -64,7 +71,10 @@ export const GameBox = ({ history, setHistory, disabledCategories }) => {
           ))}
         </Row>
         <Row className='d-flex m-4 align-items-center'>
-          <Form className='d-flex' onSubmit={(e) => check(e)}>
+          <Form
+            className='d-flex'
+            onSubmit={(e) => check(e)}
+          >
             <PokemonInput
               inputValue={answer}
               setInputValue={setAnswer}
@@ -75,14 +85,20 @@ export const GameBox = ({ history, setHistory, disabledCategories }) => {
               variant='success'
               className='d-flex align-items-center p-2 me-1'
             >
-              <Image fluid src={pokeball} />
+              <Image
+                fluid
+                src={pokeball}
+              />
             </Button>
             <Button
               variant='warning'
               className='d-flex align-items-center p-2'
               onClick={skip}
             >
-              <Image fluid src={run} />
+              <Image
+                fluid
+                src={run}
+              />
             </Button>
           </Form>
         </Row>

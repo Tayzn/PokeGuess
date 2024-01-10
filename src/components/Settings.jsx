@@ -34,7 +34,12 @@ const regionCategories = [
   'Paldea',
 ]
 
-export const Settings = ({ disabledCategories, setDisabledCategories }) => {
+export const Settings = ({
+  disabledCategories,
+  setDisabledCategories,
+  disabledRegions,
+  setDisabledRegions,
+}) => {
   const checkChanged = ({ target: { checked, value } }) => {
     if (checked) {
       setDisabledCategories(disabledCategories.filter((c) => c !== value))
@@ -60,6 +65,14 @@ export const Settings = ({ disabledCategories, setDisabledCategories }) => {
       )
     } else {
       setDisabledCategories([...disabledCategories].concat(regionCategories))
+    }
+  }
+
+  const regionsChanged = ({ target: { checked, value } }) => {
+    if (checked) {
+      setDisabledRegions(disabledRegions.filter((c) => c !== value))
+    } else {
+      setDisabledRegions([...disabledRegions, value])
     }
   }
 
@@ -128,19 +141,64 @@ export const Settings = ({ disabledCategories, setDisabledCategories }) => {
         <Form.Label className='mt-5'>Regions</Form.Label>
         <Row>
           <Col xs={4}>
-            <Form.Check label='Kanto'></Form.Check>
-            <Form.Check label='Johto'></Form.Check>
-            <Form.Check label='Hoenn'></Form.Check>
+            <Form.Check
+              label='Kanto'
+              value='Kanto'
+              checked={!disabledRegions.includes('Kanto')}
+              onChange={regionsChanged}
+            ></Form.Check>
+            <Form.Check
+              label='Johto'
+              value='Johto'
+              checked={!disabledRegions.includes('Johto')}
+              onChange={regionsChanged}
+            ></Form.Check>
+            <Form.Check
+              label='Hoenn'
+              value='Hoenn'
+              checked={!disabledRegions.includes('Hoenn')}
+              onChange={regionsChanged}
+            ></Form.Check>
           </Col>
           <Col xs={4}>
-            <Form.Check label='Sinnoh'></Form.Check>
-            <Form.Check label='Unova'></Form.Check>
-            <Form.Check label='Kalos'></Form.Check>
+            <Form.Check
+              label='Sinnoh'
+              value='Sinnoh'
+              checked={!disabledRegions.includes('Sinnoh')}
+              onChange={regionsChanged}
+            ></Form.Check>
+            <Form.Check
+              label='Unova'
+              value='Unova'
+              checked={!disabledRegions.includes('Unova')}
+              onChange={regionsChanged}
+            ></Form.Check>
+            <Form.Check
+              label='Kalos'
+              value='Kalos'
+              checked={!disabledRegions.includes('Kalos')}
+              onChange={regionsChanged}
+            ></Form.Check>
           </Col>
           <Col xs={4}>
-            <Form.Check label='Alola'></Form.Check>
-            <Form.Check label='Galar'></Form.Check>
-            <Form.Check label='Paldea'></Form.Check>
+            <Form.Check
+              label='Alola'
+              value='Alola'
+              checked={!disabledRegions.includes('Alola')}
+              onChange={regionsChanged}
+            ></Form.Check>
+            <Form.Check
+              label='Galar'
+              value='Galar'
+              checked={!disabledRegions.includes('Galar')}
+              onChange={regionsChanged}
+            ></Form.Check>
+            <Form.Check
+              label='Paldea'
+              value='Paldea'
+              checked={!disabledRegions.includes('Paldea')}
+              onChange={regionsChanged}
+            ></Form.Check>
           </Col>
         </Row>
       </Form>
