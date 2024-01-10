@@ -1,26 +1,34 @@
-import { gameCategories, animatedImages } from '../data/pokemon'
+import { gameCategories, animatedImages, pokemon } from '../data/pokemon'
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
 }
 
+function categoriesToPokemon(categories) {
+  return categories.map((category) => gameCategories[category])
+}
+
 function findIntersection(categories) {
-  const pokemon = categories.map((category) => gameCategories[category])
+  const pokemon = categoriesToPokemon(categories)
   return pokemon.reduce((a, b) => a.filter((c) => b.includes(c)))
 }
 
 function getSolutionSet(categories, disabledRegions) {
   const naiveSolution = findIntersection(categories)
-  const disabledPokemon = disabledRegions
-    .map((region) => gameCategories[region])
-    .flat()
+  const disabledPokemon = categoriesToPokemon(disabledRegions).flat()
   return naiveSolution.filter((pokemon) => !disabledPokemon.includes(pokemon))
 }
 
 export function checkAnswer(categories, answer, disabledRegions) {
-  return getSolutionSet(categories, disabledRegions).includes(
-    answer.toUpperCase()
-  )
+  const formattedAnswer = answer.toUpperCase()
+
+  if (!pokemon.includes(formattedAnswer)) {
+    return 'INVALID'
+  } else if (categoriesToPokemon(disabledRegions).includes(formattedAnswer)) {
+    return 'NOT_SELECTED'
+  }
+
+  return getSolutionSet(categories, disabledRegions).includes(formattedAnswer)
 }
 
 export function smartGenerateCategories(disabledCategories, disabledRegions) {
@@ -72,8 +80,12 @@ export function capitalizeFirstLetter(word) {
   return word[0].toUpperCase() + word.substring(1).toLowerCase()
 }
 
-export function getImage(pokemon) {
-  let formattedName = pokemon
+export function getImage(name) {
+  if (!pokemon.includes(name.toUpperCase())) {
+    return 'https://play.pokemonshowdown.com/sprites/gen5ani/unown-question.gif'
+  }
+
+  let formattedName = name
     .toLowerCase()
     .replace("'", '')
     .replace(' ', '')

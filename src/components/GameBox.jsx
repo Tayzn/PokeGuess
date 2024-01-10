@@ -1,14 +1,25 @@
 import React from 'react'
-import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap'
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Image,
+  Stack,
+  Ratio,
+} from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import {
   checkAnswer,
   addToHistory,
   smartGenerateCategories,
+  getImage,
 } from '../utility/utility'
 import PokemonInput from './PokemonInput'
 import pokeball from '../assets/images/pokeball.png'
 import run from '../assets/images/run.png'
+import preview from '../assets/images/preview.png'
 
 export const GameBox = ({
   history,
@@ -22,24 +33,35 @@ export const GameBox = ({
   const [shake, setShake] = useState(false)
 
   useEffect(() => {
-    setCategories(smartGenerateCategories(disabledCategories, disabledRegions))
+    changeCategories()
   }, [disabledCategories, disabledRegions])
+
+  const changeCategories = () => {
+    const newCategories = smartGenerateCategories(
+      disabledCategories,
+      disabledRegions
+    )
+    setCategories(newCategories)
+  }
+
+  const shakeInput = () => {
+    setShake(true)
+    setTimeout(() => setShake(false), 500)
+  }
 
   const check = (e) => {
     e.preventDefault()
+
     const result = checkAnswer(categories, answer, disabledRegions)
 
     if (result) {
       setStreak((previous) => {
         return streak + 1
       })
-      setCategories(
-        smartGenerateCategories(disabledCategories, disabledRegions)
-      )
+      changeCategories()
     } else {
       setStreak(0)
-      setShake(true)
-      setTimeout(() => setShake(false), 500)
+      shakeInput()
     }
 
     setHistory(addToHistory(history, answer, categories, result, false))
@@ -47,10 +69,10 @@ export const GameBox = ({
 
   const skip = (e) => {
     e.preventDefault()
-    setCategories(smartGenerateCategories(disabledCategories, disabledRegions))
+
+    changeCategories()
     setStreak(0)
-    setShake(true)
-    setTimeout(() => setShake(false), 500)
+    shakeInput()
   }
 
   if (categories.length <= 0) {
@@ -71,7 +93,7 @@ export const GameBox = ({
 
   return (
     <Container
-      className='d-flex justify-content-center align-items-center h-25'
+      className='d-flex justify-content-center align-items-center'
       style={{ backgroundColor: 'white' }}
     >
       <Col>
@@ -86,9 +108,27 @@ export const GameBox = ({
             </Col>
           ))}
         </Row>
-        <Row className='d-flex m-4 align-items-center'>
+        <Row className='d-flex mt-4 align-items-center justify-content-center'>
+          <Stack
+            className='m-0 p-0'
+            style={{ maxWidth: '100px' }}
+          >
+            <Ratio
+              aspectRatio={'1x1'}
+              style={{ width: '100px' }}
+            >
+              <Image
+                fluid
+                roundedCircle
+                className='p-2'
+                style={{ backgroundImage: `url(${preview})` }}
+                src={getImage(answer)}
+              />
+            </Ratio>
+          </Stack>
+
           <Form
-            className='d-flex'
+            className='d-flex w-75'
             onSubmit={(e) => check(e)}
           >
             <PokemonInput
@@ -119,7 +159,7 @@ export const GameBox = ({
           </Form>
         </Row>
         <Row>
-          <span className='d-flex justify-content-center'>
+          <span className='d-flex justify-content-center mb-3'>
             Streak: {streak}
           </span>
         </Row>
