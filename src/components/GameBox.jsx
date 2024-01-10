@@ -53,6 +53,22 @@ export const GameBox = ({
     setTimeout(() => setShake(false), 500)
   }
 
+  if (categories.length <= 0) {
+    return (
+      <Container
+        className='d-flex justify-content-center align-items-center h-25'
+        style={{ backgroundColor: '#FF355E' }}
+      >
+        <span
+          className='p-3'
+          style={{ border: 'solid 2px black', backgroundColor: 'white' }}
+        >
+          There are no valid solution sets for these settings!
+        </span>
+      </Container>
+    )
+  }
+
   return (
     <Container
       className='d-flex justify-content-center align-items-center h-25'
