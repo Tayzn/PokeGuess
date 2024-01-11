@@ -33,6 +33,7 @@ const PokemonInput = ({ inputValue, setInputValue, shake }) => {
       <Form.Control
         type='text'
         {...getInputProps()}
+        value={inputValue}
         className={shake ? 'wrong' : ''}
       />
       <ListGroup
@@ -54,8 +55,14 @@ const PokemonInput = ({ inputValue, setInputValue, shake }) => {
               }}
               {...getItemProps({ poke, index })}
             >
-              <Image fluid src={getImage(poke)} />
-              <span className='mx-2' style={{ fontWeight: '500' }}>
+              <Image
+                fluid
+                src={getImage(poke)}
+              />
+              <span
+                className='mx-2'
+                style={{ fontWeight: '500' }}
+              >
                 {capitalizeFirstLetter(poke)}
               </span>
             </ListGroup.Item>

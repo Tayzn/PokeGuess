@@ -90,6 +90,8 @@ export const GameBox = ({
       displayResult('incorrect')
       setHistory(addToHistory(history, answer, categories, result, false))
     }
+
+    setAnswer('')
   }
 
   const skip = (e) => {
@@ -157,7 +159,6 @@ export const GameBox = ({
                 />
                 <Container
                   fluid
-                  roundedCircle
                   className={
                     showResult ? 'indicator-shown' : 'indicator-hidden'
                   }
