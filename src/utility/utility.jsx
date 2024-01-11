@@ -24,7 +24,9 @@ export function checkAnswer(categories, answer, disabledRegions) {
 
   if (!pokemon.includes(formattedAnswer)) {
     return 'INVALID'
-  } else if (categoriesToPokemon(disabledRegions).includes(formattedAnswer)) {
+  } else if (
+    categoriesToPokemon(disabledRegions).flat().includes(formattedAnswer)
+  ) {
     return 'NOT_SELECTED'
   }
 

@@ -17,9 +17,19 @@ import {
   getImage,
 } from '../utility/utility'
 import PokemonInput from './PokemonInput'
+
 import pokeball from '../assets/images/pokeball.png'
 import run from '../assets/images/run.png'
 import preview from '../assets/images/preview.png'
+import incorrect from '../assets/images/incorrect.png'
+import correct from '../assets/images/correct.png'
+import invalidregion from '../assets/images/invalidregion.png'
+
+const indicatorKey = {
+  correct: correct,
+  incorrect: incorrect,
+  invalidregion: invalidregion,
+}
 
 export const GameBox = ({
   history,
@@ -31,10 +41,18 @@ export const GameBox = ({
   const [answer, setAnswer] = useState('')
   const [streak, setStreak] = useState(0)
   const [shake, setShake] = useState(false)
+  const [showResult, setShowResult] = useState(false)
+  const [resultMessage, setResultMessage] = useState('correct')
 
   useEffect(() => {
     changeCategories()
   }, [disabledCategories, disabledRegions])
+
+  const displayResult = (reason) => {
+    setResultMessage(reason)
+    setShowResult(true)
+    setTimeout(() => setShowResult(false), 500)
+  }
 
   const changeCategories = () => {
     const newCategories = smartGenerateCategories(
@@ -54,17 +72,24 @@ export const GameBox = ({
 
     const result = checkAnswer(categories, answer, disabledRegions)
 
-    if (result) {
+    if (result === true) {
       setStreak((previous) => {
-        return streak + 1
+        return previous + 1
       })
       changeCategories()
+      displayResult('correct')
+      setHistory(addToHistory(history, answer, categories, result, false))
+    } else if (result === 'INVALID') {
+      shakeInput()
+    } else if (result === 'NOT_SELECTED') {
+      shakeInput()
+      displayResult('invalidregion')
     } else {
       setStreak(0)
       shakeInput()
+      displayResult('incorrect')
+      setHistory(addToHistory(history, answer, categories, result, false))
     }
-
-    setHistory(addToHistory(history, answer, categories, result, false))
   }
 
   const skip = (e) => {
@@ -73,6 +98,7 @@ export const GameBox = ({
     changeCategories()
     setStreak(0)
     shakeInput()
+    displayResult('incorrect')
   }
 
   if (categories.length <= 0) {
@@ -93,8 +119,10 @@ export const GameBox = ({
 
   return (
     <Container
-      className='d-flex justify-content-center align-items-center'
-      style={{ backgroundColor: 'white' }}
+      className='d-flex justify-content-center align-items-center poke-border'
+      style={{
+        backgroundColor: 'white',
+      }}
     >
       <Col>
         <Row className='d-flex m-4 align-items-center'>
@@ -117,13 +145,27 @@ export const GameBox = ({
               aspectRatio={'1x1'}
               style={{ width: '100px' }}
             >
-              <Image
-                fluid
-                roundedCircle
-                className='p-2'
-                style={{ backgroundImage: `url(${preview})` }}
-                src={getImage(answer)}
-              />
+              <>
+                <Image
+                  fluid
+                  roundedCircle
+                  className='p-2'
+                  style={{
+                    backgroundImage: `url(${preview})`,
+                  }}
+                  src={getImage(answer)}
+                />
+                <Container
+                  fluid
+                  roundedCircle
+                  className={
+                    showResult ? 'indicator-shown' : 'indicator-hidden'
+                  }
+                  style={{
+                    backgroundImage: `url(${indicatorKey[resultMessage]})`,
+                  }}
+                />
+              </>
             </Ratio>
           </Stack>
 

@@ -78,7 +78,7 @@ export const Settings = ({
 
   return (
     <Container
-      className='d-flex justify-content-center align-items-center h-50'
+      className='d-flex justify-content-center align-items-center h-50 poke-border'
       style={{ backgroundColor: 'lightgray' }}
     >
       <Form>

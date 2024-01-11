@@ -11,6 +11,27 @@ body {
   animation: shake 0.2s ease-in-out 0s 2;
 }
 
+.answer-indicator {
+  transition: opacity 2s ease-in-out;
+}
+
+.indicator-shown {
+  opacity: 1;
+}
+
+.indicator-hidden {
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.poke-border {
+  border: 2px solid white;
+  box-shadow: 0 2px 0 2px black,
+              inset 0 2px 0 2px black,
+              0 0 0 2px black,
+              inset 0 0 0 2px black;
+}
+
 @keyframes shake {
   0% { margin-left: 0rem; }
   25% { margin-left: 0.5rem; }
