@@ -114,8 +114,8 @@ export function addToHistory(
 ) {
   return [
     {
-      pokemon: pokemon,
-      categories: categories,
+      pokemon: capitalizeFirstLetter(pokemon),
+      categories: [...categories],
       img: getImage(pokemon),
       correct: correct,
       skipped: skipped,

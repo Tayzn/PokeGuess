@@ -7,6 +7,7 @@ export const Header = () => {
       style={{
         backgroundColor: '#FF355E',
         borderBottom: '3px solid rgba(0,0,0,0.2)',
+        height: '5%',
       }}
     >
       PokeGuess

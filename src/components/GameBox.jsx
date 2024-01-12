@@ -135,7 +135,10 @@ export const GameBox = ({
               style={{ border: 'solid 1px' }}
               key={index}
             >
-              <CategoryLabel label={category} />
+              <CategoryLabel
+                label={category}
+                className='m-1'
+              />
             </Col>
           ))}
         </Row>

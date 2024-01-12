@@ -13,14 +13,16 @@ export const Home = () => {
   return (
     <Container
       fluid
-      className='h-100'
-      style={{ backgroundColor: '#ebe6e6', fontFamily: 'Pokemon' }}
+      style={{
+        backgroundColor: '#ebe6e6',
+        fontFamily: 'Pokemon',
+        height: '95%',
+      }}
     >
       <Row className='h-100'>
         <Col
           xs={3}
-          className='d-flex h-100 p-0'
-          style={{ backgroundColor: 'white', borderRight: '3px solid gray' }}
+          className='d-flex h-100 p-0 align-items-center justify-content-center'
         >
           <History history={gameHistory} />
         </Col>

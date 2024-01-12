@@ -71,13 +71,13 @@ const labels = {
   Monotype: monotype,
 }
 
-const CategoryLabel = ({ label }) => {
+const CategoryLabel = ({ label, className }) => {
   return (
     <Image
-      fluid
+      className={className}
       src={labels[label]}
       alt={label}
-      className='m-1'
+      style={{ maxHeight: '30px', maxWidth: '100px' }}
     />
   )
 }
