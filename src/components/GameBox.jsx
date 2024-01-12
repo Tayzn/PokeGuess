@@ -24,6 +24,7 @@ import preview from '../assets/images/preview.png'
 import incorrect from '../assets/images/incorrect.png'
 import correct from '../assets/images/correct.png'
 import invalidregion from '../assets/images/invalidregion.png'
+import CategoryLabel from './CategoryLabel'
 
 const indicatorKey = {
   correct: correct,
@@ -134,7 +135,7 @@ export const GameBox = ({
               style={{ border: 'solid 1px' }}
               key={index}
             >
-              <span>{category}</span>
+              <CategoryLabel label={category} />
             </Col>
           ))}
         </Row>
