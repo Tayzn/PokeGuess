@@ -19,6 +19,11 @@ function getSolutionSet(categories, disabledRegions) {
   return naiveSolution.filter((pokemon) => !disabledPokemon.includes(pokemon))
 }
 
+export function getExampleSolution(categories, disabledRegions) {
+  const solutions = getSolutionSet(categories, disabledRegions)
+  return solutions[getRandomIndex(solutions)]
+}
+
 export function checkAnswer(categories, answer, disabledRegions) {
   const formattedAnswer = answer.toUpperCase()
 

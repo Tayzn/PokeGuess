@@ -15,6 +15,7 @@ import {
   addToHistory,
   smartGenerateCategories,
   getImage,
+  getExampleSolution,
 } from '../utility/utility'
 import PokemonInput from './PokemonInput'
 
@@ -102,6 +103,15 @@ export const GameBox = ({
     setStreak(0)
     shakeInput()
     displayResult('incorrect')
+    setHistory(
+      addToHistory(
+        history,
+        getExampleSolution(categories, disabledRegions),
+        categories,
+        false,
+        true
+      )
+    )
   }
 
   if (categories.length <= 0) {
