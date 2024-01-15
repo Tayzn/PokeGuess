@@ -89,7 +89,7 @@ export function capitalizeFirstLetter(word) {
 
 export function getImage(name) {
   if (!pokemon.includes(name.toUpperCase())) {
-    return 'https://play.pokemonshowdown.com/sprites/gen5ani/unown-question.gif'
+    return 'https://images.vexels.com/media/users/3/152599/isolated/preview/3919975f3dac8628047ecb23632a9841-question-mark-symbol-vector.png'
   }
 
   let formattedName = name
