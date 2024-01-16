@@ -64,7 +64,9 @@ export const GameBox = ({
       disabledRegions
     )
     setCategories(newCategories)
-    setSolutionSize(getSolutionSet(newCategories, disabledRegions).length)
+    if (newCategories.length > 0) {
+      setSolutionSize(getSolutionSet(newCategories, disabledRegions).length)
+    }
   }
 
   const shakeInput = () => {
