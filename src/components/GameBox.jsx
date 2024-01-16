@@ -141,7 +141,7 @@ export const GameBox = ({
       }}
     >
       <Col>
-        <Row className='text-center m-0 mt-2 p-0 justify-content-center align-items-center d-flex'>
+        <Row className='text-center m-0 mt-2 mb-1 p-0 justify-content-center align-items-center d-flex'>
           <span className={`w-50 ${solutionSize === 1 && 'one-solution'}`}>
             Solutions: {solutionSize}
           </span>
