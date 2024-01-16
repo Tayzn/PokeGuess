@@ -18,7 +18,7 @@ function findIntersection(categories) {
   return pokemon.reduce((a, b) => a.filter((c) => b.includes(c)))
 }
 
-function getSolutionSet(categories, disabledRegions) {
+export function getSolutionSet(categories, disabledRegions) {
   const naiveSolution = findIntersection(categories)
   const disabledPokemon = categoriesToPokemon(disabledRegions).flat()
   return naiveSolution.filter((pokemon) => !disabledPokemon.includes(pokemon))

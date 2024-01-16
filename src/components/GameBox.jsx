@@ -16,6 +16,7 @@ import {
   smartGenerateCategories,
   getImage,
   getExampleSolution,
+  getSolutionSet,
 } from '../utility/utility'
 import PokemonInput from './PokemonInput'
 
@@ -45,6 +46,7 @@ export const GameBox = ({
   const [shake, setShake] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [resultMessage, setResultMessage] = useState('correct')
+  const [solutionSize, setSolutionSize] = useState(0)
 
   useEffect(() => {
     changeCategories()
@@ -62,6 +64,7 @@ export const GameBox = ({
       disabledRegions
     )
     setCategories(newCategories)
+    setSolutionSize(getSolutionSet(newCategories, disabledRegions).length)
   }
 
   const shakeInput = () => {
@@ -138,7 +141,12 @@ export const GameBox = ({
       }}
     >
       <Col>
-        <Row className='d-flex m-4 align-items-center'>
+        <Row className='text-center m-0 mt-2 p-0 justify-content-center align-items-center d-flex'>
+          <span className={`w-50 ${solutionSize === 1 && 'one-solution'}`}>
+            Solutions: {solutionSize}
+          </span>
+        </Row>
+        <Row className='d-flex m-4 mt-0 align-items-center'>
           {categories.map((category, index) => (
             <Col
               className='d-flex justify-content-center'
@@ -152,6 +160,7 @@ export const GameBox = ({
             </Col>
           ))}
         </Row>
+
         <Row className='d-flex mt-4 align-items-center justify-content-center'>
           <Stack
             className='m-0 p-0'
