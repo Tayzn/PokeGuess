@@ -1,4 +1,9 @@
-import { gameCategories, animatedImages, pokemon } from '../data/pokemon'
+import {
+  gameCategories,
+  animatedImages,
+  pokemon,
+  typeCategories,
+} from '../data/pokemon'
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
@@ -65,6 +70,12 @@ export function smartGenerateCategories(disabledCategories, disabledRegions) {
   }
 
   return []
+}
+
+export function getPokemonTypes(pokemon) {
+  return typeCategories.filter((type) =>
+    gameCategories[type].includes(pokemon.toUpperCase())
+  )
 }
 
 export function capitalizeFirstLetter(word) {

@@ -1,26 +1,6 @@
 import React from 'react'
 import { Container, Form, Row, Col } from 'react-bootstrap'
-
-const typeCategories = [
-  'Normal',
-  'Fire',
-  'Water',
-  'Electric',
-  'Grass',
-  'Ice',
-  'Fighting',
-  'Poison',
-  'Ground',
-  'Flying',
-  'Psychic',
-  'Bug',
-  'Rock',
-  'Ghost',
-  'Dragon',
-  'Dark',
-  'Steel',
-  'Fairy',
-]
+import { typeCategories } from '../data/pokemon'
 
 const regionCategories = [
   'Kanto',

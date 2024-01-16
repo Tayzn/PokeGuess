@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Image, Row, Col, Stack } from 'react-bootstrap'
 import CategoryLabel from './CategoryLabel'
+import { getPokemonTypes } from '../utility/utility'
 
 const HistoryCard = ({ pokemon, img, categories, correct, skipped }) => {
   const getBorderColor = (correct, skipped) => {
@@ -47,21 +48,42 @@ const HistoryCard = ({ pokemon, img, categories, correct, skipped }) => {
             style={{ height: '65px' }}
           />
         </Col>
-        <Col className='h-100 d-flex align-items-center'>
-          <span
-            style={{
-              fontSize: pokemon.length > 9 ? '0.8em' : '1em',
-              textOverflow: 'clip',
-            }}
-          >
-            {pokemon}
-          </span>
+        <Col
+          className='h-100 d-flex align-items-center'
+          xs={5}
+        >
+          <Stack className='h-100 d-flex justify-content-center align-items-center w-100'>
+            <span
+              style={{
+                fontSize: pokemon.length > 9 ? '0.8em' : '1em',
+                textOverflow: 'clip',
+              }}
+            >
+              {pokemon}
+            </span>
+            <Stack
+              direction='horizontal'
+              className='w-100 mt-1 justify-content-center'
+            >
+              {getPokemonTypes(pokemon).map((type, index) => (
+                <CategoryLabel
+                  key={index}
+                  label={type}
+                  className='w-50'
+                />
+              ))}
+            </Stack>
+          </Stack>
         </Col>
-        <Col className='h-100 d-flex justify-content-center align-items-center'>
-          <Stack className='my-2 align-items-end overflow-y-scroll'>
-            {categories.map((category) => (
+        <Col
+          className='h-100 d-flex justify-content-center align-items-center'
+          xs={4}
+        >
+          <Stack className='my-2 align-items-end overflow-y-scroll h-100'>
+            {categories.map((category, index) => (
               <CategoryLabel
-                className='my-0'
+                key={index}
+                className='my-0 w-100 h-50'
                 label={category}
               />
             ))}
