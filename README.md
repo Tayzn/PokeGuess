@@ -1,8 +1,18 @@
-# React + Vite
+<p align='center'>
+  <img src="/src/assets/images/readme/logofull.svg">
+</p>
+<p align='center'>~ https://tayzn.github.io/PokeGuess ~</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Introduction
+Welcome to PokeGuess, the ultimate web-based, open-source Pokémon guessing game that challenges both casual fans and seasoned trainers! Test your knowledge by matching a Pokémon to unique combinations of types and categories. Tailor your personal experience by choosing which categories and regions to play with.
+
+Live Site: https://tayzn.github.io/PokeGuess
+
+## Game Preview
+<img src="/src/assets/images/readme/preview.gif" alt="PokeGuess Demo" width="800"/>
+
+## Notice
+* This project is open source under the GPLv3 license.
+* PokeGuess is in no way affiliated with The Pokémon Company, Nintendo, Game Freak, Creatues Inc., or any of their subsidaries.
