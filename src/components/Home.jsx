@@ -14,9 +14,8 @@ export const Home = () => {
     <Container
       fluid
       style={{
-        backgroundColor: '#ebe6e6',
         fontFamily: 'Pokemon',
-        height: '95%',
+        height: '94%',
       }}
     >
       <Row className='h-100'>

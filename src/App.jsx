@@ -8,11 +8,11 @@ function App() {
   return (
     <Container
       fluid
-      className='m-0 p-0 vh-100'
+      className='m-0 p-0 vh-100 bg'
     >
       <Container
         fluid
-        className='m-0 p-0 h-100 d-flex flex-column'
+        className='m-0 p-0 h-100 d-flex flex-column bg'
       >
         <Header />
         <Home />

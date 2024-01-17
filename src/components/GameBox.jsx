@@ -148,7 +148,7 @@ export const GameBox = ({
             Solutions: {solutionSize}
           </span>
         </Row>
-        <Row className='d-flex m-4 mt-0 align-items-center'>
+        <Row className='d-flex m-4 mt-0 align-items-center '>
           {categories.map((category, index) => (
             <Col
               className='d-flex justify-content-center'
